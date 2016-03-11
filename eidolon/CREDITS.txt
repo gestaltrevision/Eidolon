@@ -1,0 +1,20 @@
+/* *************************************************************************** */
+/* *************************************************************************** */
+/* *                                                                         * */
+/* *                           EIDOLON TOOLKIT                               * */
+/* *                                                                         * */
+/* *            © de Clootcrans - Jan Koenderink 28 nov 2015                 * */
+/* *                                                                         * */
+/* *                             version 0.0                                 * */
+/* *                                                                         * */
+/* *                                                                         * */
+/* *  please report any bugs to me at KoenderinkJan@gmail.com mentioning     * */
+/* * "Eidolon toolkit" in the subject slot of your message.                  * */
+/* *                                                                         * */
+/* * I can accept no responsibility for your disasters, sorry about that!    * */
+/* *                                                                         * */
+/* *************************************************************************** */
+/* *************************************************************************** */
+
+Ported to Python by Rudy Dekeerschieter
+http://www.gestaltrevision.be/en/about-us/contact/all-contacts/32-rudy-dekeerschieter 
