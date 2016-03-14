@@ -6,7 +6,7 @@ It relies heavily on NumPy, version 1.8.1 and on PILLOW (PIL), version 1.1.7.
 It is a translation of software written in the Processing language 
 (see https://processing.org/) by <a href="http://www.gestaltrevision.be/en/about-us/contact/all-contacts/45">Jan Koenderink</a>.
 
-The original as well as a matlab version (by <a href="http://www.allpsych.uni-giessen.de/matteo/">Matteo Valsecchi</a>) can be found here:<br/> www.allpsych.uni-giessen.de/EidolonFactories/index.htm.
+The original as well as a matlab version (by <a href="http://www.allpsych.uni-giessen.de/matteo/">Matteo Valsecchi</a>) can be found <a href="http://www.allpsych.uni-giessen.de/EidolonFactories/index.htm">here</a>.
 
 A manual from the original software is available in the manual folder (<a href="https://github.com/gestaltrevision/Eidolon/blob/master/manual/Manual_1024x512_page.pdf">PDF</a>).
 
