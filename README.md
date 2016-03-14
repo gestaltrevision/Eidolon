@@ -8,7 +8,7 @@ It is a translation of software written in the Processing language
 
 The original as well as a matlab version (by <a href="http://www.allpsych.uni-giessen.de/matteo/">Matteo Valsecchi</a>) can be found here:<br/> www.allpsych.uni-giessen.de/EidolonFactories/index.htm.
 
-A manual from the original software is available in the manual folder (PDF). 
+A manual from the original software is available in the manual folder (<a href="https://github.com/gestaltrevision/Eidolon/blob/master/manual/Manual_1024x512_page.pdf">PDF</a>).
 
 The Python version relies rather heavily on generators, since there are sometimes a lot of matrices involved at a given time, and I ran into memory problems doing it any other way. 
 There’s a small library called eidolon (surprise) which contains the routines. There are 4 files there: helpers.py, noise.py, picture.py and scalespaces.py. This is where the magic happens. 
