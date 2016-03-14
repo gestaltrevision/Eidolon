@@ -1,7 +1,7 @@
 # Eidolon
 
 This software was written in Python 2.7.6 (32 bit) on a Windows 7 machine.<br/>
-It relies heavily on NumPy, version 1.8.1 and on PILLOW (PIL), version 1.1.7.
+It relies heavily on NumPy, version 1.8.1, and on PILLOW (PIL), version 1.1.7.
 
 It is a translation of software written in the Processing language 
 (see https://processing.org/) by <a href="http://www.gestaltrevision.be/en/about-us/contact/all-contacts/45">Jan Koenderink</a>.
