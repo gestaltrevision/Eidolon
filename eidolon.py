@@ -111,17 +111,17 @@ def testFunction():
     elif PRECOOKED_EXAMPLE == LOTZE_DISARRAY: 
         im = LotzeTypeDisarray(pic,REACH, GRAIN) 
     elif PRECOOKED_EXAMPLE == HELMHOLTZ_DISARRAY: 
-        im = HelmholtzTypeDisarray(pic, REACH, MAX_SIGMA) 
+        im = HelmholtzTypeDisarray(pic, REACH) 
     elif PRECOOKED_EXAMPLE == COHERENT_DISARRAY: 
-        im = CoherentDisarrayOfEdges(pic, REACH, MAX_SIGMA) 
+        im = CoherentDisarrayOfEdges(pic, REACH) 
     elif PRECOOKED_EXAMPLE == ORIENTED_EDGE_DISARRAY: 
-        im = OrientedEdgeDisarray(pic, REACH, MAX_SIGMA, INTEGRATION_FUDGE_FACTOR)
+        im = OrientedEdgeDisarray(pic, REACH, INTEGRATION_FUDGE_FACTOR)
     elif PRECOOKED_EXAMPLE == DISPLAY_SCALESPACE_LEVEL: 
         im = DisplayScalespaceLevel(pic, LEVEL)        
     elif PRECOOKED_EXAMPLE == DISPLAY_FRACTAL_NOISE_PLANE: 
-        im = DisplayFractalNoise(pic, MAX_SIGMA, LEVEL)        
+        im = DisplayFractalNoise(pic, LEVEL)        
     elif PRECOOKED_EXAMPLE == CHROMATIC_ABERRATION: 
-        im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH, MAX_SIGMA)  # is dit wel de bedoeling, werkt niet zo bij Jan...  
+        im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH)  # different from Jan's version...  
     elif PRECOOKED_EXAMPLE == EDGE_DIRECTION_MAP: 
         im = DisplayGradientDirection(pic, LEVEL) 
     elif PRECOOKED_EXAMPLE == SANITY_CHECK_I: 
@@ -137,19 +137,19 @@ def testFunction():
     elif PRECOOKED_EXAMPLE == LINE_FINDER_FIELD: 
         im = LineFinderField(pic, LEVEL) 
     elif PRECOOKED_EXAMPLE == PARTIAL_COHERENCE: 
-        im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN, MAX_SIGMA) 
+        im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN) 
     elif PRECOOKED_EXAMPLE == SUPERFICIAL_OPPONENT: 
         im = CoherentDisarrayOfEdgesOpponentChannels(pic, REACH,GRAIN) 
     elif PRECOOKED_EXAMPLE == LOTZE_OPPONENT: 
         im = LotzeDisarrayOfEdgesOpponentChannels(pic, REACH, GRAIN) 
     elif PRECOOKED_EXAMPLE == COHERENT_OPPONENT: 
-        im = CoherentDisarrayOfOpponentChannels(pic, REACH, MAX_SIGMA)
+        im = CoherentDisarrayOfOpponentChannels(pic, REACH)
     elif PRECOOKED_EXAMPLE == HELMHOLTZ_OPPONENT: 
-        im = HelmholtzDisarrayOfEdgesOpponentChannels(pic, REACH, MAX_SIGMA)
+        im = HelmholtzDisarrayOfEdgesOpponentChannels(pic, REACH)
     elif PRECOOKED_EXAMPLE == MISSING_FROM_REPRESENTATION: 
-        im = MissingFromScaleSpaceRepresentation(pic, MIN_SIGMA, MAX_SIGMA)
+        im = MissingFromScaleSpaceRepresentation(pic)
     elif PRECOOKED_EXAMPLE == DISCRETIZATION_ERROR: 
-        im = DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR, MIN_SIGMA, MAX_SIGMA)
+        im = DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR)
     else: 
         im = pic.resizedOriginalImage # just show the original image resized if no valid choices are made
     

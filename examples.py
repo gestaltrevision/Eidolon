@@ -229,7 +229,8 @@ def LotzeTypeDisarray(pic, reach, grain):                                     # 
 #/* representation.  All scale levels are disarryed by statistically identical  */
 #/* (though independent) perturbation, scaled by the local resolution.          */
 #/* *************************************************************************** */
-def HelmholtzTypeDisarray(pic, reach, MAX_SIGMA):                             # // parameter defined in function definition
+def HelmholtzTypeDisarray(pic, reach):  
+    MAX_SIGMA = pic.MAX_SIGMA                           
     print "Embarking on Helmholtz-type disarray"
     start_time = time.clock()
     
@@ -263,7 +264,8 @@ def HelmholtzTypeDisarray(pic, reach, MAX_SIGMA):                             # 
 #/* levels. The reach at a level is proprtional to the resolution. Moreover,    */
 #/* large RFs drag smaller ones along with them.                                */
 #/* *************************************************************************** */
-def CoherentDisarrayOfEdges(pic, reach, MAX_SIGMA):                         # // parameter "reach" in function definition
+def CoherentDisarrayOfEdges(pic, reach):                         # // parameter "reach" in function definition
+    MAX_SIGMA = pic.MAX_SIGMA       
     print "Embarking on coherent disarray of edges"  
     start_time = time.clock()
     
@@ -295,7 +297,8 @@ def CoherentDisarrayOfEdges(pic, reach, MAX_SIGMA):                         # //
 #/* This is a fairly complicated example. However, it uses only "straight out   */
 #/* the box" toolkit methods.                                                   */
 #/* *************************************************************************** */
-def OrientedEdgeDisarray(pic, reach, MAX_SIGMA, INTEGRATION_FUDGE_FACTOR):
+def OrientedEdgeDisarray(pic, reach, INTEGRATION_FUDGE_FACTOR):
+    MAX_SIGMA = pic.MAX_SIGMA       
     THREE_FOURTH = 3.0/4
     
     print "Embarking on synthesis from simple cell activity"  
@@ -395,7 +398,8 @@ def DisplayScalespaceLevel(pic, theLevel):
 #/* components and displaying them by way of a nice colored code (hue for       */
 #/* direction, saturation for magnitude, or whatever you fancy).                */
 #/* *************************************************************************** */
-def DisplayFractalNoise(pic, MAX_SIGMA, theLevel):         
+def DisplayFractalNoise(pic, theLevel):         
+    MAX_SIGMA = pic.MAX_SIGMA       
     print "Embarking on display fractal noise"  
     start_time = time.clock()
     
@@ -434,7 +438,8 @@ def DisplayFractalNoise(pic, MAX_SIGMA, theLevel):
 #/* Doing the disarray in opponent channels yields far nicer results, you can   */
 #/* implement it on the same pattern.                                           */
 #/* *************************************************************************** */
-def CoherentDisarrayOfEdgesRGBChannels(pic, reach, MAX_SIGMA):
+def CoherentDisarrayOfEdgesRGBChannels(pic, reach):
+    MAX_SIGMA = pic.MAX_SIGMA       
     print "Embarking on coherent disarray of edges RGB channels" 
     start_time = time.clock()
     
@@ -651,7 +656,8 @@ def LineFinderField(pic, theLevel):
 #/*                                                                             */
 #/* This implements partially coherent disarray                                 */
 #/* *************************************************************************** */
-def PartiallyCoherentDisarrayExample(pic, theReach, theCoherence, theGrain, MAX_SIGMA):                # // parameter defined in function definition
+def PartiallyCoherentDisarrayExample(pic, theReach, theCoherence, theGrain):                # // parameter defined in function definition
+    MAX_SIGMA = pic.MAX_SIGMA       
     print "Embarking on partially coherent disarray"
     start_time = time.clock()
 
@@ -792,7 +798,8 @@ def LotzeDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
 #/* COHERENT DISARRAY OF EDGES IN OPPONENT CHANNELS                             */
 #/* Notice how things soon get complicated, although standard tools suffice.    */
 #/* *************************************************************************** */
-def CoherentDisarrayOfOpponentChannels(pic, theReach, MAX_SIGMA):
+def CoherentDisarrayOfOpponentChannels(pic, theReach):
+    MAX_SIGMA = pic.MAX_SIGMA  
     print "Embarking on Lotze disarray of edges opponent channels"
     start_time = time.clock()
     
@@ -851,7 +858,8 @@ def CoherentDisarrayOfOpponentChannels(pic, theReach, MAX_SIGMA):
 #/* HELMHOLTZ DISARRAY OF EDGES IN OPPONENT CHANNELS                            */
 #/* Notice how things soon get complicated, although standard tools suffice.    */
 #/* *************************************************************************** */
-def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach, MAX_SIGMA):
+def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach):
+    MAX_SIGMA = pic.MAX_SIGMA  
     print "Embarking on Helmholtz disarray of edges opponent channels"
     start_time = time.clock()
     
@@ -911,7 +919,9 @@ def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach, MAX_SIGMA):
 #/* This example shows what the scalespace representation discards.             */
 #/* This is a special method that hopefully shows up as average gray!           */
 #/* *************************************************************************** */
-def MissingFromScaleSpaceRepresentation(pic, MIN_SIGMA, MAX_SIGMA):
+def MissingFromScaleSpaceRepresentation(pic):
+    MIN_SIGMA = pic.MIN_SIGMA  
+    MAX_SIGMA = pic.MAX_SIGMA  
     print"Embarking on missing from SS representation"
     start_time = time.clock()
     
@@ -955,7 +965,9 @@ def MissingFromScaleSpaceRepresentation(pic, MIN_SIGMA, MAX_SIGMA):
 #/* DISCRETIZATION ERROR                                                        */
 #/* This example shows the discretization error.                                */
 #/* *************************************************************************** */
-def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR, MIN_SIGMA, MAX_SIGMA):
+def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR):
+    MIN_SIGMA = pic.MIN_SIGMA  
+    MAX_SIGMA = pic.MAX_SIGMA  
     print "Embarking on discretization error"
     start_time = time.clock()
 
@@ -1040,28 +1052,28 @@ def testFunction():
 #    im = SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR) # sanity check  
 #    im = SuperficialDisarray(pic, REACH, GRAIN)     
 #    im = LotzeTypeDisarray(pic, REACH, GRAIN)
-#    im = HelmholtzTypeDisarray(pic, REACH, MAX_SIGMA)
-#    im = CoherentDisarrayOfEdges(pic, REACH, MAX_SIGMA)
-#    im = OrientedEdgeDisarray(pic, REACH, MAX_SIGMA, INTEGRATION_FUDGE_FACTOR)
+#    im = HelmholtzTypeDisarray(pic, REACH)
+#    im = CoherentDisarrayOfEdges(pic, REACH)
+#    im = OrientedEdgeDisarray(pic, REACH, INTEGRATION_FUDGE_FACTOR)
 
 #    for theLevel in range(pic.numScaleLevels):
 #        print "level =", theLevel
 #        im = DisplayScalespaceLevel(pic, theLevel)
-#        im = DisplayFractalNoise(pic, MAX_SIGMA, theLevel)
+#        im = DisplayFractalNoise(pic, theLevel)
 #        im = DisplayGradientDirection(pic, theLevel)
 #        im = GradientField(pic, theLevel) 
 #        im = LineFinderField(pic, theLevel)
 #        im.show()
 
-#    im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH, MAX_SIGMA) # is dit wel de bedoeling, werkt niet zo bij Jan...        
+#    im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH) # is dit wel de bedoeling, werkt niet zo bij Jan...        
 #    im = SynthesisFromLargestDOGActivity(pic, FRACTION)
-#    im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN, MAX_SIGMA)
+    im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN)
 #    im = CoherentDisarrayOfEdgesOpponentChannels(pic, REACH, GRAIN)   
 #    im = LotzeDisarrayOfEdgesOpponentChannels(pic, REACH, GRAIN) 
-#    im = CoherentDisarrayOfOpponentChannels(pic, REACH, MAX_SIGMA)
-#    im = HelmholtzDisarrayOfEdgesOpponentChannels(pic, REACH, MAX_SIGMA)
-#    im = MissingFromScaleSpaceRepresentation(pic, MIN_SIGMA, MAX_SIGMA)
-    im = DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR, MIN_SIGMA, MAX_SIGMA)
+#    im = CoherentDisarrayOfOpponentChannels(pic, REACH)
+#    im = HelmholtzDisarrayOfEdgesOpponentChannels(pic, REACH)
+#    im = MissingFromScaleSpaceRepresentation(pic)
+#    im = DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR)
     
     im.show()
     

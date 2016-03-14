@@ -36,6 +36,9 @@ class Picture(object):
         self._color = None
         self.fatFiducialDataPlane = self.EmbedImage(self.FiducialDataPlane(self.fiducialImage))
         self.colorFatFiducialDataPlane = None
+        self.MIN_SIGMA = MIN_SIGMA
+        self.MAX_SIGMA = MAX_SIGMA
+        self.SIGMA_FACTOR = SIGMA_FACTOR
 
     def ResetFatFiducialDataPlane(self):
         # check if we already have a colorFatFiducialDataPlane, if not, make one
