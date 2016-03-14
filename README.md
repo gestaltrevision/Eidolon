@@ -10,8 +10,8 @@ The original as well as a matlab version (by <a href="http://www.allpsych.uni-gi
 
 A manual from the original software is available in the manual folder (<a href="https://github.com/gestaltrevision/Eidolon/blob/master/manual/Manual_1024x512_page.pdf">PDF</a>).
 
-The Python version relies rather heavily on generators, since there are sometimes a lot of matrices involved at a given time, and I ran into memory problems doing it any other way. 
-There’s a small library called eidolon (surprise) which contains the routines. There are 4 files there: helpers.py, noise.py, picture.py and scalespaces.py. This is where the magic happens. 
-The file helpers.py contains a number essential functions, picture.py is a class that contains all the basic stuff the picture does and  the 2 others contain classes that provide the necessary generators. 
+The Python version relies rather heavily on generators, since there are sometimes a lot of matrices involved at a given time, and I ran into memory problems doing it any other way.<br/>
+There’s a small library called eidolon (surprise) which contains the routines. There are 4 files there: helpers.py, noise.py, picture.py and scalespaces.py. This is where the magic happens.<br/>
+The file helpers.py contains a number of essential functions, picture.py is a class that contains all the basic stuff the picture does and the 2 others contain classes that provide the necessary generators. 
 
 The file eidolon.py just sets some parameters and calls upon the examples contained in examples.py. You can run both files (there’s a test function in examples.py). The eidolon.py file more or less mimics Jan’s start file in his original Processing (JAVA) version.
