@@ -22,9 +22,9 @@
 from examples import *
 
 #==============================================================================
-# 
-# CONSTANTS - just to make life easier? 
-# 
+#
+# CONSTANTS - just to make life easier?
+#
 #==============================================================================
 
 #// Ignore the numbers, they're just labels.
@@ -63,17 +63,17 @@ DISPLAY_FRACTAL_NOISE_PLANE = 22  #// displays a fractal noise plane (one Cartes
 
 
 #==============================================================================
-# 
+#
 # Program
-# 
+#
 #==============================================================================
-def testFunction(): 
+def testFunction():
     SZ = 512
     MIN_SIGMA = 1/sqrt(2) #// 1f/sqrt(2f)
     MAX_SIGMA = SZ/4.0
     SIGMA_FACTOR = sqrt(2)  #// sqrt(2f)
 
-    INTEGRATION_FUDGE_FACTOR = 1.25; #// Serves to improves the stack integration by the trapezoidal rule 
+    INTEGRATION_FUDGE_FACTOR = 1.25; #// Serves to improves the stack integration by the trapezoidal rule
                                      #// The scale intervals are unequal in width and depend systematically on scale
                                      #// In a future update we may update the numerical integration routine
                                      #// Expected difference are slight, present method works quite well
@@ -93,69 +93,69 @@ def testFunction():
     # What are we running?
     #==============================================================================
     PRECOOKED_EXAMPLE = DISCRETIZATION_ERROR  #// PICK ANY OF THE CONSTANTS ABOVE & DEFINE PARAMETERS BELOW
-    
+
     # parameters
     REACH = 2.0 #// These are just starting values - adjust as you see fit (try factors of 2 from here for a start,
                 #// in some cases you need REALLY large changes before noticing a difference).
     GRAIN = 8.0  #// Not all of these parameters are necessarily relevant for a given method (see above).
     LEVEL = 6  #// These numbers are not of any essence:
-    FRACTION = 0.90  #// Once you get the hang of it, you won't need the precooked stuff anyway!    
+    FRACTION = 0.90  #// Once you get the hang of it, you won't need the precooked stuff anyway!
     INCOHERENCE = 0.10  #// It is imperative to obtain an intuitive feel for the effects of these parameters (and their interactions) though.
 
 
     #==============================================================================
     # What are we running?
     #==============================================================================
-    if   PRECOOKED_EXAMPLE == SUPERFICIAL_DISARRAY: 
+    if   PRECOOKED_EXAMPLE == SUPERFICIAL_DISARRAY:
         im = SuperficialDisarray(pic,REACH,GRAIN)
-    elif PRECOOKED_EXAMPLE == LOTZE_DISARRAY: 
-        im = LotzeTypeDisarray(pic,REACH, GRAIN) 
-    elif PRECOOKED_EXAMPLE == HELMHOLTZ_DISARRAY: 
-        im = HelmholtzTypeDisarray(pic, REACH) 
-    elif PRECOOKED_EXAMPLE == COHERENT_DISARRAY: 
-        im = CoherentDisarrayOfEdges(pic, REACH) 
-    elif PRECOOKED_EXAMPLE == ORIENTED_EDGE_DISARRAY: 
+    elif PRECOOKED_EXAMPLE == LOTZE_DISARRAY:
+        im = LotzeTypeDisarray(pic,REACH, GRAIN)
+    elif PRECOOKED_EXAMPLE == HELMHOLTZ_DISARRAY:
+        im = HelmholtzTypeDisarray(pic, REACH)
+    elif PRECOOKED_EXAMPLE == COHERENT_DISARRAY:
+        im = CoherentDisarrayOfEdges(pic, REACH)
+    elif PRECOOKED_EXAMPLE == ORIENTED_EDGE_DISARRAY:
         im = OrientedEdgeDisarray(pic, REACH, INTEGRATION_FUDGE_FACTOR)
-    elif PRECOOKED_EXAMPLE == DISPLAY_SCALESPACE_LEVEL: 
-        im = DisplayScalespaceLevel(pic, LEVEL)        
-    elif PRECOOKED_EXAMPLE == DISPLAY_FRACTAL_NOISE_PLANE: 
-        im = DisplayFractalNoise(pic, LEVEL)        
-    elif PRECOOKED_EXAMPLE == CHROMATIC_ABERRATION: 
-        im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH)  # different from Jan's version...  
-    elif PRECOOKED_EXAMPLE == EDGE_DIRECTION_MAP: 
-        im = DisplayGradientDirection(pic, LEVEL) 
-    elif PRECOOKED_EXAMPLE == SANITY_CHECK_I: 
-        im = SynthesisFromDOGActivity(pic)       
-    elif PRECOOKED_EXAMPLE == SANITY_CHECK_III: 
+    elif PRECOOKED_EXAMPLE == DISPLAY_SCALESPACE_LEVEL:
+        im = DisplayScalespaceLevel(pic, LEVEL)
+    elif PRECOOKED_EXAMPLE == DISPLAY_FRACTAL_NOISE_PLANE:
+        im = DisplayFractalNoise(pic, LEVEL)
+    elif PRECOOKED_EXAMPLE == CHROMATIC_ABERRATION:
+        im = CoherentDisarrayOfEdgesRGBChannels(pic, REACH)  # different from Jan's version...
+    elif PRECOOKED_EXAMPLE == EDGE_DIRECTION_MAP:
+        im = DisplayGradientDirection(pic, LEVEL)
+    elif PRECOOKED_EXAMPLE == SANITY_CHECK_I:
+        im = SynthesisFromDOGActivity(pic)
+    elif PRECOOKED_EXAMPLE == SANITY_CHECK_III:
         im = SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR)
-    elif PRECOOKED_EXAMPLE == SANITY_CHECK_II: 
+    elif PRECOOKED_EXAMPLE == SANITY_CHECK_II:
         im = SynthesisFromLaplacian(pic, INTEGRATION_FUDGE_FACTOR)
-    elif PRECOOKED_EXAMPLE == LARGEST_DOG_ACTIVITY: 
+    elif PRECOOKED_EXAMPLE == LARGEST_DOG_ACTIVITY:
         im = SynthesisFromLargestDOGActivity(pic, FRACTION)
-    elif PRECOOKED_EXAMPLE == GRADIENT_FIELD: 
-        im = GradientField(pic, LEVEL) 
-    elif PRECOOKED_EXAMPLE == LINE_FINDER_FIELD: 
-        im = LineFinderField(pic, LEVEL) 
-    elif PRECOOKED_EXAMPLE == PARTIAL_COHERENCE: 
-        im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN) 
-    elif PRECOOKED_EXAMPLE == SUPERFICIAL_OPPONENT: 
-        im = CoherentDisarrayOfEdgesOpponentChannels(pic, REACH,GRAIN) 
-    elif PRECOOKED_EXAMPLE == LOTZE_OPPONENT: 
-        im = LotzeDisarrayOfEdgesOpponentChannels(pic, REACH, GRAIN) 
-    elif PRECOOKED_EXAMPLE == COHERENT_OPPONENT: 
+    elif PRECOOKED_EXAMPLE == GRADIENT_FIELD:
+        im = GradientField(pic, LEVEL)
+    elif PRECOOKED_EXAMPLE == LINE_FINDER_FIELD:
+        im = LineFinderField(pic, LEVEL)
+    elif PRECOOKED_EXAMPLE == PARTIAL_COHERENCE:
+        im = PartiallyCoherentDisarrayExample(pic, REACH, INCOHERENCE, GRAIN)
+    elif PRECOOKED_EXAMPLE == SUPERFICIAL_OPPONENT:
+        im = CoherentDisarrayOfEdgesOpponentChannels(pic, REACH,GRAIN)
+    elif PRECOOKED_EXAMPLE == LOTZE_OPPONENT:
+        im = LotzeDisarrayOfEdgesOpponentChannels(pic, REACH, GRAIN)
+    elif PRECOOKED_EXAMPLE == COHERENT_OPPONENT:
         im = CoherentDisarrayOfOpponentChannels(pic, REACH)
-    elif PRECOOKED_EXAMPLE == HELMHOLTZ_OPPONENT: 
+    elif PRECOOKED_EXAMPLE == HELMHOLTZ_OPPONENT:
         im = HelmholtzDisarrayOfEdgesOpponentChannels(pic, REACH)
-    elif PRECOOKED_EXAMPLE == MISSING_FROM_REPRESENTATION: 
+    elif PRECOOKED_EXAMPLE == MISSING_FROM_REPRESENTATION:
         im = MissingFromScaleSpaceRepresentation(pic)
-    elif PRECOOKED_EXAMPLE == DISCRETIZATION_ERROR: 
+    elif PRECOOKED_EXAMPLE == DISCRETIZATION_ERROR:
         im = DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR)
-    else: 
+    else:
         im = pic.resizedOriginalImage # just show the original image resized if no valid choices are made
-    
+
     # show the calculated image
     im.show()
-    
+
 #==============================================================================
 # main
 #==============================================================================
