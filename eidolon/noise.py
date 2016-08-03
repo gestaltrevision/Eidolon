@@ -194,22 +194,33 @@ class CoherentRandomGaussianDataStack(DataStack):
 #==============================================================================
 # class PartiallyCoherentScaledGaussianDataStack
 #==============================================================================
+
 class PartiallyCoherentScaledGaussianDataStack(DataStack):
+
+    """This is a data stack generator, generates an Coherent Random Gaussian Data
+    Stack.
+
     """
-    This is a data stack generator, generates an Coherent Random Gaussian Data Stack.
-    """
-    def __init__(self, numScaleLevels, w, h, sigma, MAX_SIGMA, scaleLevels, degree):
-        super(PartiallyCoherentScaledGaussianDataStack, self).__init__(numScaleLevels, w, h)
+
+    def __init__(self, numScaleLevels, w, h, sigma, MAX_SIGMA, scaleLevels,
+                 degree):
+        if degree < 0 or degree > 1:
+            raise ValueError('Degree of coherence must fall in [0, 1]')
+        super(PartiallyCoherentScaledGaussianDataStack,
+              self).__init__(numScaleLevels, w, h)
         self.degree = degree
         self.incoh = IncoherentGaussianDataStack(numScaleLevels, w, h, sigma)
-        self.coh = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
+        self.coh = CoherentRandomGaussianDataStack(numScaleLevels, w, h,
+                                                   MAX_SIGMA, scaleLevels)
 
     def next(self):
         if self.current == self.numScaleLevels:
-            raise StopIteration("Out of bounds! The number of scale levels is " + str(self.numScaleLevels) + "!")
+            raise StopIteration("Out of bounds! The number of scale levels is "
+                                + str(self.numScaleLevels) + "!")
         else:
             self.current += 1
-            return self.incoh.next() * self.degree + self.coh.next()
+            return ((1 - self.degree) * self.incoh.next() +
+                    self.degree * self.coh.next())
 
 
 
