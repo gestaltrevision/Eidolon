@@ -4,20 +4,20 @@
 import numpy as np
 
 #==============================================================================
-# 
-# Classes 
-# 
+#
+# Classes
+#
 #==============================================================================
 #==============================================================================
 # class Convolution
 #==============================================================================
-class Convolution(object):            
+class Convolution(object):
     """
     This allows you to get a kernel and a convolution of that kernel with a
     given data plane. Both kernel and convolved are accessible as class
     variables, respectively kernel and convolved.
     """
-    def __init__(self, dataPlane, xOrder, yOrder, w, h, sigma):     
+    def __init__(self, dataPlane, xOrder, yOrder, w, h, sigma):
         self.dataPlane = dataPlane
         self.xOrder = xOrder
         self.yOrder = yOrder
@@ -28,62 +28,62 @@ class Convolution(object):
     @property # this calculates the kernel and is presented as a class variable
     def kernel(self):
         return self.Kernel(self.xOrder, self.yOrder, self.w, self.h, self.sigma)
-    
-    # this calculates the convolution between the kernel and a given dataplane 
-    # and is presented as a class variable 
-    @property 
+
+    # this calculates the convolution between the kernel and a given dataplane
+    # and is presented as a class variable
+    @property
     def convolved(self):
         return self.Convolve(self.dataPlane, self.kernel)
-           
+
 #    # convolve - from convolution
 #    def Convolve(self, dataPlane, kernel):
 #        dataPlaneFFT = np.fft.rfft2(dataPlane)
-#        kernelFFT = np.fft.rfft2(kernel) 
-#        return np.fft.irfft2((dataPlaneFFT * kernelFFT)) 
-              
+#        kernelFFT = np.fft.rfft2(kernel)
+#        return np.fft.irfft2((dataPlaneFFT * kernelFFT))
+
     # convolve - from convolution - slightly faster with flattened matrices
     def Convolve(self, dataPlane, kernel):
         (h,w) = dataPlane.shape
         return (np.fft.irfft( np.fft.rfft(dataPlane.flatten()) * np.fft.rfft(kernel.flatten()) )).reshape(h,w)
-    
+
     # make kernel to convolve with
-    def Kernel(self, xOrder, yOrder, w, h, sigma): 
+    def Kernel(self, xOrder, yOrder, w, h, sigma):
         v = np.array(range(h/2 + 1) + range(h/2-h + 1, 0))
-        column = ((-1.0/(sigma * sqrt(2)))**yOrder) * self.HermitePolynomial(yOrder, v/(sigma * sqrt(2))) * self.Gaussian(v, sigma)  
+        column = ((-1.0/(sigma * sqrt(2)))**yOrder) * self.HermitePolynomial(yOrder, v/(sigma * sqrt(2))) * self.Gaussian(v, sigma)
         u = np.array(range(w/2 + 1) + range(w/2-w + 1, 0))
-        row = ((-1.0/(sigma * sqrt(2)))**xOrder) * self.HermitePolynomial(xOrder, u/(sigma * sqrt(2))) * self.Gaussian(u, sigma) 
+        row = ((-1.0/(sigma * sqrt(2)))**xOrder) * self.HermitePolynomial(xOrder, u/(sigma * sqrt(2))) * self.Gaussian(u, sigma)
         return row * column[:, np.newaxis]
 
     #// Hermite polynomials, via the recursion relation - from utilities
-    def HermitePolynomial(self, n, x): 
+    def HermitePolynomial(self, n, x):
         if int(n) != n:
-            raise ValueError('The value of n must be an integer!')        
+            raise ValueError('The value of n must be an integer!')
         if n == 0:
             return 1.0
         elif n == 1:
-            return 2.0 * x 
+            return 2.0 * x
         else:
             return 2.0 * (x * self.HermitePolynomial(n-1, x) - (n-1) * self.HermitePolynomial(n-2, x))
-    
+
     #// Gaussian - from utilities
     def Gaussian(self, x, sigma):
         return np.exp(-x**2 / (2.0 * sigma**2)) / (np.sqrt(2 * np.pi) * sigma)
 
-            
+
 #==============================================================================
 # class DifferentialScaleSpace
 #==============================================================================
-class DifferentialScaleSpace(object): 
+class DifferentialScaleSpace(object):
     """
     This allows you to implement any differential order.
     It's the same thing as the Scalespace, but with xOrder and yOrder != 0.
     """
-    def __init__(self, picture, xOrder, yOrder):     
+    def __init__(self, picture, xOrder, yOrder):
         self.pic = picture
         self.current = 0
         self.xOrder = xOrder
         self.yOrder = yOrder
-        
+
     def __iter__(self):
         return self
 
@@ -105,7 +105,7 @@ class DifferentialScaleSpace(object):
 #==============================================================================
 # class ScaleSpace
 #==============================================================================
-class ScaleSpace(DifferentialScaleSpace): 
+class ScaleSpace(DifferentialScaleSpace):
     """
     This builds the scalespace.
     It does not have much immediate uses, but you may enjoy watching what the various layers look like.
@@ -113,12 +113,12 @@ class ScaleSpace(DifferentialScaleSpace):
     """
     def __init__(self, picture):
         super(ScaleSpace, self).__init__(picture, 0, 0)
-        
-                
+
+
 #==============================================================================
 # class RockBottomPlane
 #==============================================================================
-class RockBottomPlane(DifferentialScaleSpace): 
+class RockBottomPlane(DifferentialScaleSpace):
     """
     This builds the rockBottomPlane which is the last value of the scalespace.
     I still use a generator for this, since that conserves memory and also for
@@ -139,7 +139,7 @@ class RockBottomPlane(DifferentialScaleSpace):
 #==============================================================================
 # class DOGScaleSpace
 #==============================================================================
-class DOGScaleSpace(object): 
+class DOGScaleSpace(object):
     """
     These are actually "scalespace slices", if you add them you regain the image.
     The nature of this decomposition is that it is by "edges" in the phenomenonological
@@ -150,13 +150,13 @@ class DOGScaleSpace(object):
     def __init__(self, picture):
         self.numScaleLevels = picture.numScaleLevels
         self.scaleStackGenerator = ScaleSpace(picture)
-        self.current = 0        
+        self.current = 0
         self.first = self.scaleStackGenerator.next()
-       
+
     def __iter__(self):
         return self
 
-    def next(self):        
+    def next(self):
         if self.current == self.numScaleLevels:
             raise StopIteration("DOGScaleSpace out of bounds! The number of scale levels is " + str(self.numScaleLevels) + "!")
         else:
@@ -164,31 +164,31 @@ class DOGScaleSpace(object):
             self.current += 1
             if self.current < self.numScaleLevels:
                 self.second = self.scaleStackGenerator.next()
-                self.first = self.second    
+                self.first = self.second
                 second = np.copy(self.second)
                 return first - second
-            else:   
+            else:
                 return self.second
 
 
 #==============================================================================
 # class FiducialSecondOrder
 #==============================================================================
-class FiducialSecondOrder(object): 
+class FiducialSecondOrder(object):
     """
     This constructs the "line finder" activity, a simple formal model for the representation in primary visual cortex.
-    Here I transform from the Hessian matrix representation to a nice isotropic basis of three line finders 
-    at 60 degrees orientation differences (fiducialSecondOrderPScaleSpace , fiducialSecondOrderQScaleSpace 
+    Here I transform from the Hessian matrix representation to a nice isotropic basis of three line finders
+    at 60 degrees orientation differences (fiducialSecondOrderPScaleSpace , fiducialSecondOrderQScaleSpace
     and fiducialSecondOrderRScaleSpace).
-    The coefficients are easy enough to find with a little algebra. 
+    The coefficients are easy enough to find with a little algebra.
     """
     def __init__(self, picture):
         self.numScaleLevels = picture.numScaleLevels
         self.hessianXX = DifferentialScaleSpace(picture, 2, 0) #// Compute the Hessian matrix coefficients
         self.hessianXY = DifferentialScaleSpace(picture, 1, 1) #// here the Hessian itself is discarded
         self.hessianYY = DifferentialScaleSpace(picture, 0, 2)
-        self.current = 0        
-       
+        self.current = 0
+
     def __iter__(self):
         return self
 
@@ -200,21 +200,21 @@ class FiducialSecondOrder(object):
             fiducialSecondOrderPScaleSpace = self.hessianXX.next()
             # Here I transform from the Hessian matrix representation to a nice
             # isotropic basis of three line finders at 60 degrees orientation differences.
-            # The coefficients are easy enough to find with a little algebra. 
+            # The coefficients are easy enough to find with a little algebra.
             tmp1 = fiducialSecondOrderPScaleSpace * (1.0/8) + self.hessianYY.next() * (3.0/8)
             tmp2 = self.hessianXY.next() * (-np.sqrt(3)/4.0)
-                       
+
             # fiducialSecondOrderPScaleSpace = hessianXX #// these are the simple cell ("line finder") activities
             fiducialSecondOrderQScaleSpace = tmp1 + tmp2 #// the basis consists of three line finders at 120 degrees orientation increments
-            fiducialSecondOrderRScaleSpace = tmp1 - tmp2 #// this suffices to easily find the activity for ANY orientation   
+            fiducialSecondOrderRScaleSpace = tmp1 - tmp2 #// this suffices to easily find the activity for ANY orientation
 
             return fiducialSecondOrderPScaleSpace, fiducialSecondOrderQScaleSpace, fiducialSecondOrderRScaleSpace
 
 
 #==============================================================================
 # class FiducialLaplacian
-#==============================================================================                
-class FiducialLaplacian(object): 
+#==============================================================================
+class FiducialLaplacian(object):
     """
     This is the true Laplacian defined as a second order differential invariant.
     It is almost identical to the DOG representation, so there is actually little need for it.
@@ -225,28 +225,28 @@ class FiducialLaplacian(object):
         self.numScaleLevels = picture.numScaleLevels
         self.hessianXX = DifferentialScaleSpace(picture, 2, 0) #// Compute the Hessian matrix coefficients
         self.hessianYY = DifferentialScaleSpace(picture, 0, 2)
-        self.current = 0        
-       
+        self.current = 0
+
     def __iter__(self):
         return self
 
     def next(self):
         if self.current == self.numScaleLevels:
             raise StopIteration("FiducialLaplacian out of bounds! The number of scale levels is " + str(self.numScaleLevels) + "!")
-        else:               
-            self.current += 1           
-            return self.hessianXX.next() + self.hessianYY.next() 
+        else:
+            self.current += 1
+            return self.hessianXX.next() + self.hessianYY.next()
 
 
 
 #==============================================================================
-# 
+#
 # Program
-# 
+#
 #==============================================================================
 from picture import *
 
-def testFunction(): 
+def testFunction():
 #    SZ = 16
     SZ = 512
     MIN_SIGMA = 1/sqrt(2) #// 1f/sqrt(2f)
@@ -255,7 +255,7 @@ def testFunction():
 
     pic = Picture('Hanna.jpg', SZ, MIN_SIGMA, MAX_SIGMA, SIGMA_FACTOR)
 #    pic = Picture('test.jpg', SZ, MIN_SIGMA, MAX_SIGMA, SIGMA_FACTOR)
-    
+
     dataPlane = pic.fatFiducialDataPlane
     numScaleLevels = pic.numScaleLevels
 
@@ -269,14 +269,14 @@ def testFunction():
 #    for i in range(numScaleLevels):
 #        x = scaleStackGenerator.next()
 #        Image.fromarray(x.astype('uint8'), 'L').show()
-   
+
 #==============================================================================
 # test RockBottomPlane
 #==============================================================================
     rockBottomPlaneGenerator = RockBottomPlane(pic)
 #    x = rockBottomPlaneGenerator.next()
 #    Image.fromarray(x.astype('uint8'), 'L').show()
-        
+
 #==============================================================================
 # test DOGScaleSpace
 #==============================================================================
@@ -290,7 +290,7 @@ def testFunction():
 # test fiducialSecondOrderGenerator
 #==============================================================================
     fiducialSecondOrderGenerator = FiducialSecondOrder(pic)
-#    for i in range(numScaleLevels):    
+#    for i in range(numScaleLevels):
 #        P, Q, R = fiducialSecondOrderGenerator.next()
 #        Image.fromarray(P.astype('uint8'), 'L').show()
 #        Image.fromarray(Q.astype('uint8'), 'L').show()
@@ -301,7 +301,7 @@ def testFunction():
 # test FiducialLaplacian
 #==============================================================================
     fiducialLaplacianGenerator = FiducialLaplacian(pic)
-    for i in range(numScaleLevels):    
+    for i in range(numScaleLevels):
         x = fiducialLaplacianGenerator.next()
 #        print i, "\n", x
         p += x
@@ -312,7 +312,7 @@ def testFunction():
 #==============================================================================
     fiducialFirstOrderXScaleSpace = DifferentialScaleSpace(pic,1,0)
     fiducialFirstOrderYScaleSpace = DifferentialScaleSpace(pic,0,1)
-#    for i in range(numScaleLevels):    
+#    for i in range(numScaleLevels):
 #        x = fiducialFirstOrderXScaleSpace.next()
 #        p += x
 #        Image.fromarray(x.astype('uint8'), 'L').show()
