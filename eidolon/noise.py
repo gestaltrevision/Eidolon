@@ -3,7 +3,7 @@
 #==============================================================================
 import numpy as np
 
-from scalespaces import Convolution
+from eidolon.scalespaces import Convolution
 
 #==============================================================================
 

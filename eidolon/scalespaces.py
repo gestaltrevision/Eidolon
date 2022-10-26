@@ -244,7 +244,7 @@ class FiducialLaplacian(object):
 # Program
 # 
 #==============================================================================
-from picture import *
+from eidolon.picture import *
 
 def testFunction(): 
 #    SZ = 16
