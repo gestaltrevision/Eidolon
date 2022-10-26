@@ -156,7 +156,7 @@ class DOGScaleSpace(object):
     def __iter__(self):
         return self
 
-    def next(self):        
+    def __next__(self):        
         if self.current == self.numScaleLevels:
             raise StopIteration("DOGScaleSpace out of bounds! The number of scale levels is " + str(self.numScaleLevels) + "!")
         else:
