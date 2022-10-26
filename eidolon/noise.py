@@ -271,7 +271,7 @@ def testFunction():
         teller += 1
         print(x)
     
-    start_time =  time.clock()    
+    start_time =  time.perf_counter()    
     c = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
     teller = 1
     for x in c:
@@ -280,9 +280,9 @@ def testFunction():
 #        print x
 #        x += 1
         pass
-    print("===========> --- %s seconds ---" % ( time.clock() - start_time))
+    print("===========> --- %s seconds ---" % ( time.perf_counter() - start_time))
     
-    start_time =  time.clock()       
+    start_time =  time.perf_counter()       
     p = PartiallyCoherentScaledGaussianDataStack(numScaleLevels, w, h, sigma, MAX_SIGMA, scaleLevels, degree)
     teller = 1
     for x in p:
@@ -290,7 +290,7 @@ def testFunction():
 #        teller += 1
 #        print x
         pass
-    print("===========> --- %s seconds ---" % ( time.clock() - start_time))
+    print("===========> --- %s seconds ---" % ( time.perf_counter() - start_time))
 
 
 
