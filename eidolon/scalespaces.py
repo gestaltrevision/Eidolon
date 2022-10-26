@@ -333,4 +333,4 @@ def testFunction():
 if __name__ == "__main__":
     testFunction()
 
-    print "Scalespaces Done!"
+    print("Scalespaces Done!")
