@@ -47,10 +47,10 @@ class Convolution(object):
         return (np.fft.irfft( np.fft.rfft(dataPlane.flatten()) * np.fft.rfft(kernel.flatten()) )).reshape(h,w)
     
     # make kernel to convolve with
-    def Kernel(self, xOrder, yOrder, w, h, sigma): 
-        v = np.array(range(h/2 + 1) + range(h/2-h + 1, 0))
+    def Kernel(self, xOrder, yOrder, w, h, sigma):
+        v = np.array(range(h//2-h + 1, h//2 + 1))
         column = ((-1.0/(sigma * sqrt(2)))**yOrder) * self.HermitePolynomial(yOrder, v/(sigma * sqrt(2))) * self.Gaussian(v, sigma)  
-        u = np.array(range(w/2 + 1) + range(w/2-w + 1, 0))
+        u = np.array(range(w//2-w + 1, w//2 + 1))
         row = ((-1.0/(sigma * sqrt(2)))**xOrder) * self.HermitePolynomial(xOrder, u/(sigma * sqrt(2))) * self.Gaussian(u, sigma) 
         return row * column[:, np.newaxis]
 
