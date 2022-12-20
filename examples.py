@@ -61,13 +61,13 @@ from eidolon.helpers import *
 #/* the synthesis. This is the generic way to produce eidolons.                 */
 #/* *************************************************************************** */
 def SynthesisFromDOGActivity(pic):
-    print "Embarking on synthesis from DOG activity"
-    start_time = time.clock()
+    print("Embarking on synthesis from DOG activity")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -76,7 +76,7 @@ def SynthesisFromDOGActivity(pic):
         eidolonDataPlane += fiducialDOGScaleSpace.next() # this is a generator!
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -89,8 +89,8 @@ def SynthesisFromDOGActivity(pic):
 #/* again!).                                                                    */
 #/* *************************************************************************** */
 def SynthesisFromLaplacian(pic, INTEGRATION_FUDGE_FACTOR):
-    print "Embarking on synthesis from Laplacians"
-    start_time = time.clock()
+    print("Embarking on synthesis from Laplacians")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES
     rockBottomPlaneGenerator = RockBottomPlane(pic)       # // needed because of the lowest resolution plane
@@ -99,7 +99,7 @@ def SynthesisFromLaplacian(pic, INTEGRATION_FUDGE_FACTOR):
     scaleLevels = pic.scaleLevels
     picSize = pic.fatFiducialDataPlane.shape
     
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -108,7 +108,7 @@ def SynthesisFromLaplacian(pic, INTEGRATION_FUDGE_FACTOR):
     
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
     
@@ -129,8 +129,8 @@ def SynthesisFromLaplacian(pic, INTEGRATION_FUDGE_FACTOR):
 #/* *************************************************************************** */
 def SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR):
     THREE_FOURTH = 3.0/4
-    print "Embarking on synthesis from simple cell activity"
-    start_time = time.clock()
+    print("Embarking on synthesis from simple cell activity")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES
     rockBottomPlaneGenerator = RockBottomPlane(pic)       # // needed because of the lowest resolution plane
@@ -139,7 +139,7 @@ def SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR):
     scaleLevels = pic.scaleLevels
     picSize = pic.fatFiducialDataPlane.shape
 
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     integratedList = StackIntegrateMultiple(fiducialSecondOrderGenerator, numScaleLevels, scaleLevels, picSize)
@@ -152,7 +152,7 @@ def SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR):
  
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -164,12 +164,12 @@ def SynthesisFromSimpleCellActivity(pic, INTEGRATION_FUDGE_FACTOR):
 #/* This implements "CAPTCHA"-style rendering.                                  */
 #/* *************************************************************************** */
 def SuperficialDisarray(pic, reach,  grain):                                  #// parameters defined in function definition
-    print "Embarking on superficial disarray"
-    start_time = time.clock()
+    print("Embarking on superficial disarray")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES  - NOT NEEDED HERE
 
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON  
     (h, w) = pic.fatFiducialDataPlane.shape
@@ -182,7 +182,7 @@ def SuperficialDisarray(pic, reach,  grain):                                  #/
   
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -196,8 +196,8 @@ def SuperficialDisarray(pic, reach,  grain):                                  #/
 #/* independent) perturbation.                                                  */
 #/* *************************************************************************** */
 def LotzeTypeDisarray(pic, reach, grain):                                     # // parameter defined in function definition
-    print "Embarking on Lotze-type disarray"
-    start_time = time.clock()
+    print("Embarking on Lotze-type disarray")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
@@ -205,7 +205,7 @@ def LotzeTypeDisarray(pic, reach, grain):                                     # 
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -216,7 +216,7 @@ def LotzeTypeDisarray(pic, reach, grain):                                     # 
 #    eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     eidolon = DataToImage(pic.DisembedDataPlane(eidolonDataPlane, clip=False)) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon.astype('uint8'), 'L')
 
@@ -231,8 +231,8 @@ def LotzeTypeDisarray(pic, reach, grain):                                     # 
 #/* *************************************************************************** */
 def HelmholtzTypeDisarray(pic, reach):  
     MAX_SIGMA = pic.MAX_SIGMA                           
-    print "Embarking on Helmholtz-type disarray"
-    start_time = time.clock()
+    print("Embarking on Helmholtz-type disarray")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
@@ -241,7 +241,7 @@ def HelmholtzTypeDisarray(pic, reach):
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -251,7 +251,7 @@ def HelmholtzTypeDisarray(pic, reach):
     
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -266,8 +266,8 @@ def HelmholtzTypeDisarray(pic, reach):
 #/* *************************************************************************** */
 def CoherentDisarrayOfEdges(pic, reach):                         # // parameter "reach" in function definition
     MAX_SIGMA = pic.MAX_SIGMA       
-    print "Embarking on coherent disarray of edges"  
-    start_time = time.clock()
+    print("Embarking on coherent disarray of edges") 
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
@@ -276,7 +276,7 @@ def CoherentDisarrayOfEdges(pic, reach):                         # // parameter 
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -285,7 +285,7 @@ def CoherentDisarrayOfEdges(pic, reach):                         # // parameter 
   
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -301,8 +301,8 @@ def OrientedEdgeDisarray(pic, reach, INTEGRATION_FUDGE_FACTOR):
     MAX_SIGMA = pic.MAX_SIGMA       
     THREE_FOURTH = 3.0/4
     
-    print "Embarking on synthesis from simple cell activity"  
-    start_time = time.clock()
+    print("Embarking on synthesis from simple cell activity") 
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     picSize = pic.fatFiducialDataPlane.shape
@@ -311,12 +311,12 @@ def OrientedEdgeDisarray(pic, reach, INTEGRATION_FUDGE_FACTOR):
     
     #// B. SET UP NECESSARY DATA STRUCTURES
     rockBottomPlaneGenerator = RockBottomPlane(pic)       # // needed because of the lowest resolution plane
-    print("rockBottomPlaneGenerator --- %s seconds ---" % ( time.clock() - start_time))
-    start_time = time.clock()
+    print("rockBottomPlaneGenerator --- %s seconds ---" % ( time.perf_counter() - start_time))
+    start_time = time.perf_counter()
     
     fiducialSecondOrder = FiducialSecondOrder(pic)        # // sets up the simple cell activity
-    print("fiducialSecondOrder --- %s seconds ---" % ( time.clock() - start_time))
-    start_time = time.clock()
+    print("fiducialSecondOrder --- %s seconds ---" % ( time.perf_counter() - start_time))
+    start_time = time.perf_counter()
 
     #  surface.setTitle("Computing scale spaces P ...");               
     noiseStackPx = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
@@ -327,10 +327,10 @@ def OrientedEdgeDisarray(pic, reach, INTEGRATION_FUDGE_FACTOR):
     #  surface.setTitle("Computing scale spaces R ...");
     noiseStackRx = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
     noiseStackRy = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
-    print("Building noise stacks --- %s seconds ---" % ( time.clock() - start_time))
-    start_time = time.clock()
+    print("Building noise stacks --- %s seconds ---" % ( time.perf_counter() - start_time))
+    start_time = time.perf_counter()
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -352,7 +352,7 @@ def OrientedEdgeDisarray(pic, reach, INTEGRATION_FUDGE_FACTOR):
                
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -367,13 +367,13 @@ def DisplayScalespaceLevel(pic, theLevel):
     if theLevel >= pic.numScaleLevels:
         raise ValueError('Not so much levels as ' + str(theLevel) + ', maximum = ' + str(pic.numScaleLevels - 1) + ' (0 - ' + str(pic.numScaleLevels - 1) + ')!')
     
-    print "Embarking on display scalespace level"
-    start_time = time.clock()
+    print("Embarking on display scalespace level")
+    start_time = time.perf_counter()
     
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialScaleSpace = ScaleSpace(pic)     
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -385,7 +385,7 @@ def DisplayScalespaceLevel(pic, theLevel):
  
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -400,8 +400,8 @@ def DisplayScalespaceLevel(pic, theLevel):
 #/* *************************************************************************** */
 def DisplayFractalNoise(pic, theLevel):         
     MAX_SIGMA = pic.MAX_SIGMA       
-    print "Embarking on display fractal noise"  
-    start_time = time.clock()
+    print("Embarking on display fractal noise")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
@@ -410,7 +410,7 @@ def DisplayFractalNoise(pic, theLevel):
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialScaleSpace = ScaleSpace(pic)     
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -424,7 +424,7 @@ def DisplayFractalNoise(pic, theLevel):
         
     eidolon = DataToImage(pic.DisembedDataPlane(eidolonDataPlane, clip=False)) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -440,8 +440,8 @@ def DisplayFractalNoise(pic, theLevel):
 #/* *************************************************************************** */
 def CoherentDisarrayOfEdgesRGBChannels(pic, reach):
     MAX_SIGMA = pic.MAX_SIGMA       
-    print "Embarking on coherent disarray of edges RGB channels" 
-    start_time = time.clock()
+    print("Embarking on coherent disarray of edges RGB channels")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
@@ -450,26 +450,26 @@ def CoherentDisarrayOfEdgesRGBChannels(pic, reach):
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialScaleSpace = ScaleSpace(pic)     
   
-    print "Computing eidolon..."                         
+    print("Embarking on coherent disarray of edges RGB channels")                       
   
     #// B & C COMBINED AND REPEATED THREE TIMES
  
-    print "Computing RED scale spaces..."
+    print("Computing RED scale spaces...")
     pic.color = 'red' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpace = DOGScaleSpace(pic) 
-    print "Computing RED eidolon dataplane..."
+    print("Computing RED eidolon dataplane...")
     eidolonRedDataPlane = CoherentDisarray(fiducialDOGScaleSpace, reach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
       
-    print "Computing GREEN scale spaces..."
+    print("Computing GREEN scale spaces...")
     pic.color = 'green' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpace = DOGScaleSpace(pic) 
-    print "Computing GREEN eidolon dataplane..."
+    print("Computing GREEN eidolon dataplane...")
     eidolonGreenDataPlane = CoherentDisarray(fiducialDOGScaleSpace, reach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
       
-    print "Computing BLUE scale spaces..."
+    print("Computing BLUE scale spaces...")
     pic.color = 'blue' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpace = DOGScaleSpace(pic) 
-    print "Computing BLUE eidolon dataplane..."
+    print("Computing BLUE eidolon dataplane...")
     eidolonBlueDataPlane = CoherentDisarray(fiducialDOGScaleSpace, reach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
     
     pic.color = None # restore to b&w, just in case
@@ -484,7 +484,7 @@ def CoherentDisarrayOfEdgesRGBChannels(pic, reach):
 #    eidolon[:,:,1] = pic.DisembedDataPlane(eidolonGreenDataPlane)
 #    eidolon[:,:,2] = pic.DisembedDataPlane(eidolonBlueDataPlane)
         
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon)
 
@@ -506,15 +506,15 @@ def DisplayGradientDirection(pic, theLevel):
     if theLevel >= pic.numScaleLevels:
         raise ValueError('Not so much levels as ' + str(theLevel) + ', maximum = ' + str(pic.numScaleLevels - 1) + ' (0 - ' + str(pic.numScaleLevels - 1) + ')!')
 
-    print "Embarking on display gradient direction"
-    start_time = time.clock()
+    print("Embarking on display gradient direction")
+    start_time = time.perf_counter()
     
     #// B. SET UP NECESSARY DATA STRUCTURES
     # from Jan -> constructFiducialFirstOrder();
     fiducialFirstOrderXScaleSpace = DifferentialScaleSpace(pic,1,0)
     fiducialFirstOrderYScaleSpace = DifferentialScaleSpace(pic,0,1)
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -530,7 +530,7 @@ def DisplayGradientDirection(pic, theLevel):
     eidolon = DataToImage(pic.DisembedDataPlane(eidolonDataPlane, clip=False))
 #    eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -545,13 +545,13 @@ def DisplayGradientDirection(pic, theLevel):
 #/* is one-shot: it doesn't have to clean up the mess it leaves behind.         */
 #/* *************************************************************************** */
 def SynthesisFromLargestDOGActivity(pic, fraction):
-    print "Embarking on synthesis from largest DOG activity"
-    start_time = time.clock()
+    print("Embarking on synthesis from largest DOG activity")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -566,7 +566,7 @@ def SynthesisFromLargestDOGActivity(pic, fraction):
     eidolon = DataToImage(pic.DisembedDataPlane(eidolonDataPlane, clip=False))
 #    eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
 
@@ -581,15 +581,15 @@ def GradientField(pic, theLevel):
     if theLevel >= pic.numScaleLevels:
         raise ValueError('Not so much levels as ' + str(theLevel) + ', maximum = ' + str(pic.numScaleLevels - 1) + ' (0 - ' + str(pic.numScaleLevels - 1) + ')!')
 
-    print "Embarking on gradient field"
-    start_time = time.clock()
+    print("Embarking on gradient field")
+    start_time = time.perf_counter()
     
     #// B. SET UP NECESSARY DATA STRUCTURES
     # from Jan -> constructFiducialFirstOrder();
     fiducialFirstOrderXScaleSpace = DifferentialScaleSpace(pic,1,0)
     fiducialFirstOrderYScaleSpace = DifferentialScaleSpace(pic,0,1)
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolon = np.zeros((pic.embeddingData['h'], pic.embeddingData['w'], 3)).astype('uint8')
@@ -607,7 +607,7 @@ def GradientField(pic, theLevel):
     eidolon[:,:,1] = pic.DisembedDataPlane(eidolonDataPlane[:,:,1])
     eidolon[:,:,2] = pic.DisembedDataPlane(eidolonDataPlane[:,:,2])
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')
 
@@ -622,13 +622,13 @@ def LineFinderField(pic, theLevel):
     if theLevel >= pic.numScaleLevels:
         raise ValueError('Not so much levels as ' + str(theLevel) + ', maximum = ' + str(pic.numScaleLevels - 1) + ' (0 - ' + str(pic.numScaleLevels - 1) + ')!')
 
-    print "Embarking on line finder field"
-    start_time = time.clock()
+    print("Embarking on line finder field")
+    start_time = time.perf_counter()
     
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialSecondOrder = FiducialSecondOrder(pic)  
     
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolon = np.zeros((pic.embeddingData['h'], pic.embeddingData['w'], 3)).astype('uint8')
@@ -645,7 +645,7 @@ def LineFinderField(pic, theLevel):
     eidolon[:,:,1] = pic.DisembedDataPlane(eidolonDataPlane[:,:,1])
     eidolon[:,:,2] = pic.DisembedDataPlane(eidolonDataPlane[:,:,2])
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')
 
@@ -658,15 +658,15 @@ def LineFinderField(pic, theLevel):
 #/* *************************************************************************** */
 def PartiallyCoherentDisarrayExample(pic, theReach, theCoherence, theGrain):                # // parameter defined in function definition
     MAX_SIGMA = pic.MAX_SIGMA       
-    print "Embarking on partially coherent disarray"
-    start_time = time.clock()
+    print("Embarking on partially coherent disarray")
+    start_time = time.perf_counter()
 
     #// B. SET UP NECESSARY DATA STRUCTURES
     fiducialDOGScaleSpace = DOGScaleSpace(pic)     #// this is the datastructure that is really needed
   
     (h,w) = pic.fatFiducialDataPlane.shape  
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
     eidolonDataPlane = np.zeros(pic.fatFiducialDataPlane.shape)
@@ -675,7 +675,7 @@ def PartiallyCoherentDisarrayExample(pic, theReach, theCoherence, theGrain):    
 
     eidolon = pic.DisembedDataPlane(eidolonDataPlane) #// convert dataplane to image
     
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'L')
             
@@ -690,14 +690,14 @@ def PartiallyCoherentDisarrayExample(pic, theReach, theCoherence, theGrain):    
 #/* enough to change.                                                           */
 #/* *************************************************************************** */
 def CoherentDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
-    print "Embarking on coherent disarray of edges opponent channels"
-    start_time = time.clock()
+    print("Embarking on coherent disarray of edges opponent channels")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels
     scaleLevels = pic.scaleLevels     
   
-    print "Computing eidolon..."   
+    print("Computing eidolon...")  
                       
     #// B & C COMBINED AND REPEATED THREE TIMES
     pic.color = 'red' # have to set a color to make the pic produce color data planes
@@ -708,20 +708,20 @@ def CoherentDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
     kw, rg, yb = ImageToOpponentRepresentation(r, g, b)
     pic.color = None # reset color, just to be on the safe side
       
-    print "BLACK-WHITE disarray going on..."
+    print("BLACK-WHITE disarray going on...")
     xDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     yDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     kwPlane = DataPlaneDisarray(kw, xDisplacements, yDisplacements, theReach)
-    print "RED_GREEN disarray going on..."
+    print("RED_GREEN disarray going on...")
     xDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     yDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     rgPlane = DataPlaneDisarray(rg, xDisplacements, yDisplacements, theReach)
-    print "YELLOW_BLUE disarray going on..."
+    print("YELLOW_BLUE disarray going on...")
     xDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     yDisplacements = BlurredRandomGaussianDataPlane(w, h, theGrain).blurredRandomGaussianDataPlane
     ybPlane = DataPlaneDisarray(yb, xDisplacements, yDisplacements, theReach)
      
-    print "Opponent representation to RGB-image..."
+    print("Opponent representation to RGB-image...")
     r, g, b = OpponentRepresentationToImage(kwPlane, rgPlane, ybPlane)
     
     eidolon = np.zeros((pic.embeddingData['h'], pic.embeddingData['w'], 3)).astype('uint8')
@@ -730,7 +730,7 @@ def CoherentDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
     eidolon[:,:,1] = pic.DisembedDataPlane(g)
     eidolon[:,:,2] = pic.DisembedDataPlane(b)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')
 
@@ -741,22 +741,22 @@ def CoherentDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
 #/* Notice how things soon get complicated, although standard tools suffice.    */
 #/* *************************************************************************** */
 def LotzeDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
-    print "Embarking on Lotze disarray of edges opponent channels"
-    start_time = time.clock()
+    print("Embarking on Lotze disarray of edges opponent channels")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels  
   
-    print "Computing eidolon..."   
+    print("Computing eidolon...")
                       
     #// B & C COMBINED AND REPEATED THREE TIMES
-    print "Computing RED scale spaces..."
+    print("Computing RED scale spaces...")
     pic.color = 'red' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceR = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing GREEN scale spaces..."
+    print("Computing GREEN scale spaces...")
     pic.color = 'green' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceG = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing BLUE scale spaces..."
+    print("Computing BLUE scale spaces...")
     pic.color = 'blue' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceB = list(DOGScaleSpace(pic)) # dump generator into list for the next step
 
@@ -771,14 +771,14 @@ def LotzeDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
     del (fiducialDOGScaleSpaceG)
     del (fiducialDOGScaleSpaceB)
 
-    print "BLACK-WHITE disarray going on..."
+    print("BLACK-WHITE disarray going on...")
     kwPlane = LotzeDisarray(fiducialDOGScaleSpaceKW,theReach,theGrain, numScaleLevels, w, h);
-    print "RED_GREEN disarray going on..."
+    print("RED_GREEN disarray going on...")
     rgPlane = LotzeDisarray(fiducialDOGScaleSpaceRG,theReach,theGrain, numScaleLevels, w, h);
-    print "YELLOW_BLUE disarray going on..."
+    print("YELLOW_BLUE disarray going on...")
     ybPlane = LotzeDisarray(fiducialDOGScaleSpaceYB,theReach,theGrain, numScaleLevels, w, h);
     
-    print "Opponent representation to RGB-image..."
+    print("Opponent representation to RGB-image...")
 
     r, g, b = OpponentRepresentationToImage(kwPlane, rgPlane, ybPlane)
     
@@ -788,7 +788,7 @@ def LotzeDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
     eidolon[:,:,1] = pic.DisembedDataPlane(g)
     eidolon[:,:,2] = pic.DisembedDataPlane(b)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')
 
@@ -800,23 +800,23 @@ def LotzeDisarrayOfEdgesOpponentChannels(pic, theReach, theGrain):
 #/* *************************************************************************** */
 def CoherentDisarrayOfOpponentChannels(pic, theReach):
     MAX_SIGMA = pic.MAX_SIGMA  
-    print "Embarking on Lotze disarray of edges opponent channels"
-    start_time = time.clock()
+    print("Embarking on Lotze disarray of edges opponent channels")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels     
     scaleLevels = pic.scaleLevels      
   
-    print "Computing eidolon..."   
+    print("Computing eidolon...")   
                       
     #// B & C COMBINED AND REPEATED THREE TIMES
-    print "Computing RED scale spaces..."
+    print("Computing RED scale spaces...")
     pic.color = 'red' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceR = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing GREEN scale spaces..."
+    print("Computing GREEN scale spaces...")
     pic.color = 'green' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceG = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing BLUE scale spaces..."
+    print("Computing BLUE scale spaces...")
     pic.color = 'blue' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceB = list(DOGScaleSpace(pic)) # dump generator into list for the next step
 
@@ -831,14 +831,14 @@ def CoherentDisarrayOfOpponentChannels(pic, theReach):
     del (fiducialDOGScaleSpaceG)
     del (fiducialDOGScaleSpaceB)
 
-    print "BLACK-WHITE disarray going on..."
+    print("BLACK-WHITE disarray going on...")
     kwPlane = CoherentDisarray(fiducialDOGScaleSpaceKW, theReach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
-    print "RED_GREEN disarray going on..."
+    print("RED_GREEN disarray going on...")
     rgPlane = CoherentDisarray(fiducialDOGScaleSpaceRG, theReach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
-    print "YELLOW_BLUE disarray going on..."
+    print("YELLOW_BLUE disarray going on...")
     ybPlane = CoherentDisarray(fiducialDOGScaleSpaceYB, theReach, w, h, MAX_SIGMA, numScaleLevels, scaleLevels)
    
-    print "Opponent representation to RGB-image..."
+    print("Opponent representation to RGB-image...")
 
     r, g, b = OpponentRepresentationToImage(kwPlane, rgPlane, ybPlane)
     
@@ -848,7 +848,7 @@ def CoherentDisarrayOfOpponentChannels(pic, theReach):
     eidolon[:,:,1] = pic.DisembedDataPlane(g)
     eidolon[:,:,2] = pic.DisembedDataPlane(b)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')    
     
@@ -860,23 +860,23 @@ def CoherentDisarrayOfOpponentChannels(pic, theReach):
 #/* *************************************************************************** */
 def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach):
     MAX_SIGMA = pic.MAX_SIGMA  
-    print "Embarking on Helmholtz disarray of edges opponent channels"
-    start_time = time.clock()
+    print("Embarking on Helmholtz disarray of edges opponent channels")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels     
     scaleLevels = pic.scaleLevels      
   
-    print "Computing eidolon..."   
+    print("Computing eidolon...")   
                       
     #// B & C COMBINED AND REPEATED THREE TIMES
-    print "Computing RED scale spaces..."
+    print("Computing RED scale spaces...")
     pic.color = 'red' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceR = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing GREEN scale spaces..."
+    print("Computing GREEN scale spaces...")
     pic.color = 'green' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceG = list(DOGScaleSpace(pic)) # dump generator into list for the next step
-    print "Computing BLUE scale spaces..."
+    print("Computing BLUE scale spaces...")
     pic.color = 'blue' # setting the color variable to ensure the right data plane is used
     fiducialDOGScaleSpaceB = list(DOGScaleSpace(pic)) # dump generator into list for the next step
 
@@ -891,14 +891,14 @@ def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach):
     del (fiducialDOGScaleSpaceG)
     del (fiducialDOGScaleSpaceB)
 
-    print "BLACK-WHITE disarray going on..."
+    print("BLACK-WHITE disarray going on...")
     kwPlane = HelmholtzDisarray(fiducialDOGScaleSpaceKW, theReach, numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
-    print "RED_GREEN disarray going on..."
+    print("RED_GREEN disarray going on...")
     rgPlane = HelmholtzDisarray(fiducialDOGScaleSpaceRG, theReach, numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
-    print "YELLOW_BLUE disarray going on..."
+    print("YELLOW_BLUE disarray going on...")
     ybPlane = HelmholtzDisarray(fiducialDOGScaleSpaceYB, theReach, numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
    
-    print "Opponent representation to RGB-image..."
+    print("Opponent representation to RGB-image...")
 
     r, g, b = OpponentRepresentationToImage(kwPlane, rgPlane, ybPlane)
     
@@ -908,7 +908,7 @@ def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach):
     eidolon[:,:,1] = pic.DisembedDataPlane(g)
     eidolon[:,:,2] = pic.DisembedDataPlane(b)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')   
     
@@ -922,14 +922,14 @@ def HelmholtzDisarrayOfEdgesOpponentChannels(pic, theReach):
 def MissingFromScaleSpaceRepresentation(pic):
     MIN_SIGMA = pic.MIN_SIGMA  
     MAX_SIGMA = pic.MAX_SIGMA  
-    print"Embarking on missing from SS representation"
-    start_time = time.clock()
+    print("Embarking on missing from SS representation")
+    start_time = time.perf_counter()
     
     (h,w) = pic.fatFiducialDataPlane.shape
     numScaleLevels = pic.numScaleLevels     
     scaleLevels = pic.scaleLevels   
 
-    print "Finding missing high resolution detail"
+    print("Finding missing high resolution detail")
     sp = ScaleSpace(pic)
     fdMinSigma = sp.FuzzyDerivative(pic.fatFiducialDataPlane, 0, 0, MIN_SIGMA)
     fdMaxSigma = sp.FuzzyDerivative(pic.fatFiducialDataPlane, 0, 0, MAX_SIGMA)
@@ -955,7 +955,7 @@ def MissingFromScaleSpaceRepresentation(pic):
     eidolon[:,:,1] = pic.DisembedDataPlane(dataG)
     eidolon[:,:,2] = pic.DisembedDataPlane(dataB)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')   
   
@@ -968,8 +968,8 @@ def MissingFromScaleSpaceRepresentation(pic):
 def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR):
     MIN_SIGMA = pic.MIN_SIGMA  
     MAX_SIGMA = pic.MAX_SIGMA  
-    print "Embarking on discretization error"
-    start_time = time.clock()
+    print("Embarking on discretization error")
+    start_time = time.perf_counter()
 
     (h,w) = pic.fatFiducialDataPlane.shape  
     numScaleLevels = pic.numScaleLevels
@@ -981,10 +981,10 @@ def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR):
     fiducialDOGScaleSpace = DOGScaleSpace(pic);
     fiducialLaplacianScaleSpace = FiducialLaplacian(pic);  
   
-    print "Computing eidolon..."
+    print("Computing eidolon...")
       
     #// C. CONSTRUCT THE EIDOLON
-    print "Synthesizing and finding difference"
+    print("Synthesizing and finding difference")
 
     sp = ScaleSpace(pic)
     fdMinSigma = sp.FuzzyDerivative(pic.fatFiducialDataPlane, 0, 0, MIN_SIGMA)
@@ -993,7 +993,7 @@ def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR):
     error = (fdMinSigma - fdMaxSigma) - StackIntegrate(fiducialLaplacianScaleSpace, numScaleLevels, scaleLevels, picSize) * INTEGRATION_FUDGE_FACTOR
     errorData = QuartilesAndPercentLevels(error)   
 
-    print "Error median is: " + str(errorData['q0.50']) + ", inter quartile range is " + str(errorData['q0.75'] - errorData['q0.25']) + "."
+    print( "Error median is: " + str(errorData['q0.50']) + ", inter quartile range is " + str(errorData['q0.75'] - errorData['q0.25']) + ".")
 
     averageGray = np.ones((h,w)) * 127.5            # // Use uniform average gray for zero level
     dataR = averageGray + error                     # // Positive deviations YELLOW, negative BLUE
@@ -1006,7 +1006,7 @@ def DiscretizationError(pic, INTEGRATION_FUDGE_FACTOR):
     eidolon[:,:,1] = pic.DisembedDataPlane(dataG)
     eidolon[:,:,2] = pic.DisembedDataPlane(dataB)
 
-    print("--- %s seconds ---" % ( time.clock() - start_time))
+    print("--- %s seconds ---" % ( time.perf_counter() - start_time))
     
     return Image.fromarray(eidolon, 'RGB')   
   
@@ -1084,4 +1084,4 @@ def testFunction():
 if __name__ == "__main__":
     testFunction()
 
-    print "Examples Done!"
+    print("Examples Done!")

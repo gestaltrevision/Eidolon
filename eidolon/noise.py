@@ -3,7 +3,7 @@
 #==============================================================================
 import numpy as np
 
-from scalespaces import Convolution
+from eidolon.scalespaces import Convolution
 
 #==============================================================================
 
@@ -240,38 +240,38 @@ def testFunction():
     degree = 0.666
 
     r = RandomDataPlane(w, h)      
-    print "randomGaussianDataPlane \n", r.randomGaussianDataPlane    
-    print "randomUniformDataPlane \n", r.randomUniformDataPlane
+    print("randomGaussianDataPlane \n", r.randomGaussianDataPlane) 
+    print("randomUniformDataPlane \n", r.randomUniformDataPlane)
     
     r = RandomDataPlane(w, h, loc=10.0, scale=20)      
-    print "randomGaussianDataPlane \n", r.randomGaussianDataPlane    
-    print "randomUniformDataPlane \n", r.randomUniformDataPlane
+    print("randomGaussianDataPlane \n", r.randomGaussianDataPlane)
+    print("randomUniformDataPlane \n", r.randomUniformDataPlane)
     
     r = RandomDataPlane(w, h, low=10.0, high=100.0)      
-    print "randomGaussianDataPlane \n", r.randomGaussianDataPlane    
-    print "randomUniformDataPlane \n", r.randomUniformDataPlane
+    print("randomGaussianDataPlane \n", r.randomGaussianDataPlane)
+    print("randomUniformDataPlane \n", r.randomUniformDataPlane)
     
     b = BlurredRandomGaussianDataPlane(w, h, sigma)
-    print "blurredRandomGaussianDataPlane \n", b.blurredRandomGaussianDataPlane
+    print("blurredRandomGaussianDataPlane \n", b.blurredRandomGaussianDataPlane)
     
     s = ScaledBlurredRandomGaussianDataPlane(w, h, sigma, MAX_SIGMA)
-    print "scaledBlurredRandomGaussianDataPlane \n", s.scaledBlurredRandomGaussianDataPlane
+    print("scaledBlurredRandomGaussianDataPlane \n", s.scaledBlurredRandomGaussianDataPlane)
 
     i1 = IncoherentGaussianDataStack(numScaleLevels, w, h, sigma)
     teller = 1
     for x in i1:
-        print teller, "\n"
+        print(teller)
         teller += 1
-        print x
+        print(x)
     
     i2 = IncoherentScaledGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
     teller = 1
     for x in i2:
-        print teller, "\n"
+        print(teller)
         teller += 1
-        print x
+        print(x)
     
-    start_time =  time.clock()    
+    start_time =  time.perf_counter()    
     c = CoherentRandomGaussianDataStack(numScaleLevels, w, h, MAX_SIGMA, scaleLevels)
     teller = 1
     for x in c:
@@ -280,9 +280,9 @@ def testFunction():
 #        print x
 #        x += 1
         pass
-    print("===========> --- %s seconds ---" % ( time.clock() - start_time))
+    print("===========> --- %s seconds ---" % ( time.perf_counter() - start_time))
     
-    start_time =  time.clock()       
+    start_time =  time.perf_counter()       
     p = PartiallyCoherentScaledGaussianDataStack(numScaleLevels, w, h, sigma, MAX_SIGMA, scaleLevels, degree)
     teller = 1
     for x in p:
@@ -290,7 +290,7 @@ def testFunction():
 #        teller += 1
 #        print x
         pass
-    print("===========> --- %s seconds ---" % ( time.clock() - start_time))
+    print("===========> --- %s seconds ---" % ( time.perf_counter() - start_time))
 
 
 
@@ -301,4 +301,4 @@ def testFunction():
 if __name__ == "__main__":
     testFunction()
 
-    print "Noice Done!"    
+    print("Noice Done!")

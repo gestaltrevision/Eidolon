@@ -6,7 +6,7 @@ import numpy as np
 #==============================================================================
 # Eidolon imports
 #==============================================================================
-from noise import *
+from eidolon.noise import *
 
 #==============================================================================
 # Helper functions
@@ -245,9 +245,10 @@ def StackDisarray(aDOGScaleSpace, xDisplacements, yDisplacements, reach):
     sd = StackDisarrayGenerator(aDOGScaleSpace, xDisplacements, yDisplacements, reach)
     tmp = None  
     for plane in sd:
-        if tmp == None:
+        if tmp is None:
             tmp = np.zeros(plane.shape)
-        tmp += plane
+        else:
+            tmp += plane
     return tmp
 
 
